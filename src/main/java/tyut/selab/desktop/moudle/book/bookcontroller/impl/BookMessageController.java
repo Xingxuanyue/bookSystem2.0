@@ -31,6 +31,12 @@ public class BookMessageController implements  IBookMessageController{
     }
 
     @Override
+    public List<BookVo> quereyBorrowBookByBorrowerId(Integer borrowerId) throws SQLException, NoSuchFieldException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        List<BookVo> bookVos = bookMessageService.queryBorrowBookByBorrowewrId(borrowerId);
+        return bookVos;
+    }
+
+    @Override
     public List<BookVo> queryBorrowBookLog(Integer studentNumber) throws SQLException, NoSuchFieldException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         List<BookVo> bookVos = bookMessageService.queryBorrowBookLog(studentNumber);
         return bookVos;
@@ -52,6 +58,12 @@ public class BookMessageController implements  IBookMessageController{
     public List<BookVo> queryBookByUserid(Integer userStudentNumber) throws SQLException, NoSuchFieldException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         List<BookVo> bookVos = bookMessageService.queryBookByUserid(userStudentNumber);
         return bookVos;
+    }
+
+    @Override
+    public BookVo queryBookLog(Integer userStudentNumber, String bookName) throws SQLException, NoSuchFieldException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        BookVo bookVo = bookMessageService.queryBookLog(userStudentNumber, bookName);
+        return bookVo;
     }
 
     @Override

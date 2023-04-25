@@ -7,7 +7,7 @@ import java.util.List;
 
 public class book_GetConnection {
    public int executeUpdate(String sql,Object...params) throws SQLException {
-       Connection connection = MysqlConnect.getConnection();
+       Connection connection = User_MysqlConnect.getConnection();
        PreparedStatement preparedStatement = connection.prepareStatement(sql);
       if(params !=null && params.length >0){
           for (int i = 1; i <= params.length; i++) {
@@ -16,7 +16,7 @@ public class book_GetConnection {
       }
        int rows = preparedStatement.executeUpdate();
       preparedStatement.close();
-      MysqlConnect.closeConnection();
+
        return rows;
    }
    public <T> List<T> executeQuery(Class<T> clazz,String sql,Object...params) throws SQLException, InstantiationException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException {
@@ -38,9 +38,11 @@ public class book_GetConnection {
                Field field = clazz.getDeclaredField(name);
                if(field.getType() == Class.forName("java.util.Date")){
                    values = new Date(resultSet.getTimestamp(i).getTime());
+               }else if (field.getType() == Class.forName("java.lang.Integer")) {
+                   values = Integer.valueOf( resultSet.getObject(i).toString());
                }else {
-                    values = resultSet.getObject(i);
-               }
+                       values = resultSet.getObject(i);
+                   }
                field.setAccessible(true);
                field.set(t,values);
            }

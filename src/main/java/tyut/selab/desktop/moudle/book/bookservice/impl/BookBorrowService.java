@@ -24,7 +24,6 @@ public class BookBorrowService implements IBookBorrowService {
     private IBookBorrowDao bookBorrowDao = new BookBorrowDao();
 
     private IBookMessageDao bookMessageDao = new BookMessageDao();
-    private IBookBorrowService bookBorrowService = new BookBorrowService();
     private IUserDao userDao;
 
     @Override
@@ -55,8 +54,7 @@ public class BookBorrowService implements IBookBorrowService {
         UserVo userVo = new UserVo();
         userVo.setName(user.getName());
         userVo.setGender(user.getGender());
-        Integer roleId = user.getRoleId();
-        String role = userDao.queryIdRole(roleId);
+        String role =  user.getRole().getDuty();
         userVo.setDuty(role);
         userVo.setStudentNumber(user.getStudentNumber());
         userVo.setPhone(user.getPhone());
