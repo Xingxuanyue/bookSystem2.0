@@ -12,6 +12,8 @@ import tyut.selab.desktop.moudle.student.domain.User;
 import tyut.selab.desktop.moudle.student.domain.vo.UserVo;
 import tyut.selab.desktop.moudle.student.userdao.IUserDao;
 import tyut.selab.desktop.moudle.student.userdao.impl.UserDao;
+import tyut.selab.desktop.moudle.student.userservice.IUserService;
+import tyut.selab.desktop.moudle.student.userservice.impl.UserService;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -20,7 +22,7 @@ import java.util.List;
 public class BookMessageService implements IBookMessageService {
     private IBookMessageDao bookMessageDao = new BookMessageDao();
     private IBookBorrowDao bookBorrowDao = new BookBorrowDao();
-
+    private IUserService userService = new UserService();
     private IUserDao userDao = new UserDao();
 
     @Override
@@ -57,8 +59,7 @@ public class BookMessageService implements IBookMessageService {
         UserVo userVo = new UserVo();
         userVo.setName(user.getName());
         userVo.setGender(user.getGender());
-        Integer roleId = user.getRoleId();
-        String role = userDao.queryIdRole(roleId);
+        String role =  user.getRole().getDuty();
         userVo.setDuty(role);
         userVo.setStudentNumber(user.getStudentNumber());
         userVo.setPhone(user.getPhone());
@@ -111,6 +112,36 @@ public class BookMessageService implements IBookMessageService {
                     bookVo.setBookUserVo(userVoUser);
                     bookVo.setBorrowBookTime(bookBorrows.get(i).getBorrowBookTime());
                     bookVo.setReturnBookTime(bookBorrows.get(i).getReturnBookTime());
+                    bookVo.setBookName(books.get(j).getBookName());
+                    bookVo.setBookPrice(books.get(j).getBookPrice());
+                    bookVo.setBookStatus(books.get(j).getBookStatus());
+                    bookVos.add(bookVo);
+                    break;
+                }
+            }
+        }
+        return bookVos;
+    }
+
+    @Override
+    public List<BookVo> queryBorrowBookByBorrowewrId(Integer borrowerId) throws SQLException, NoSuchFieldException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        List<BookBorrow> bookBorrows = bookMessageDao.queryBorrowBookByBorrowerId(borrowerId);
+        List<BookVo> bookVos = new ArrayList<>();
+        for (int i = 0; i < bookBorrows.size(); i++) {
+            BookVo bookVo = new BookVo();
+            Integer borrowUserStudentNumber = bookBorrows.get(i).getBorrowUserStudentNumber();
+            User userBorrow = userDao.queryUserByStudentNumber(borrowUserStudentNumber);
+            UserVo userVoBorrow = userChangeUserVo(userBorrow);
+            bookVo.setBorrowBookUserVo(userVoBorrow);
+            Integer userStudentNumber = bookBorrows.get(i).getUserStudentNumber();
+            User userUser = userDao.queryUserByStudentNumber(userStudentNumber);
+            UserVo userVoUser = userChangeUserVo(userUser);
+            bookVo.setBookUserVo(userVoUser);
+            bookVo.setBorrowBookTime(bookBorrows.get(i).getBorrowBookTime());
+            bookVo.setReturnBookTime(bookBorrows.get(i).getReturnBookTime());
+            List<Book> books = bookMessageDao.queryBookByUserid(bookBorrows.get(i).getUserStudentNumber());
+            for (int j = 0; j < books.size(); j++) {
+                if(books.get(j).getBookId() == bookBorrows.get(i).getBookId()){
                     bookVo.setBookName(books.get(j).getBookName());
                     bookVo.setBookPrice(books.get(j).getBookPrice());
                     bookVo.setBookStatus(books.get(j).getBookStatus());
@@ -245,7 +276,19 @@ public class BookMessageService implements IBookMessageService {
             return bookVos;
         }
 
-        @Override
+    @Override
+    public BookVo queryBookLog(Integer userStudentNumber, String bookName) throws SQLException, NoSuchFieldException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        Book book = bookMessageDao.queryAsBook(userStudentNumber, bookName);
+        BookVo bookVo = new BookVo();
+        bookVo.setBookName(book.getBookName());
+        UserVo userVo = userService.queryUserByStudentNumber(book.getUserStudentNumber());
+        bookVo.setBookUserVo(userVo);
+        bookVo.setBookStatus(book.getBookStatus());
+        bookVo.setBookPrice(book.getBookPrice());
+        return bookVo;
+    }
+
+    @Override
         public int insertBook (BookVo book) throws SQLException {
             Book newBook = new Book();
             newBook.setBookName(book.getBookName());
