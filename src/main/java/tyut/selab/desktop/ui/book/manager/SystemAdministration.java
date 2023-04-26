@@ -829,6 +829,8 @@ public class SystemAdministration extends JPanel {
 //
 //                });
 
+
+                // 逻辑这里我有点乱
                 jb.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
