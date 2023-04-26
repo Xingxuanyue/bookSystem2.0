@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Properties;
@@ -23,7 +24,7 @@ public class MysqlConnect{
         Properties properties = new Properties();
         FileInputStream resourceAsStream = null;
         try {
-           resourceAsStream = new FileInputStream(JdbcUtils.class.getResource("/").getPath() + "druid.properties");
+            resourceAsStream = new FileInputStream(JdbcUtils.class.getResource("/").getPath() + "druid.properties");
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }

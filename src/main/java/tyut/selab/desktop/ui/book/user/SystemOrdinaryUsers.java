@@ -85,7 +85,8 @@ public class SystemOrdinaryUsers extends JPanel {
             }
         };
         js.setBounds(0,0,1010,600);
-        viewJPanel.setBounds(250, 130, 1010, 600);
+        viewJPanel.setLayout(null);//add
+//        viewJPanel.setBounds(250, 130, 1010, 600);  删除
         viewJPanel.add(js);
         viewJPanel.setVisible(true);
         add(viewJPanel);
@@ -112,7 +113,7 @@ public class SystemOrdinaryUsers extends JPanel {
         addButton.setFont(new Font("微软雅黑", Font.BOLD, 15));
         addButton.setBackground(new Color(0xFFFF4E4E, true));
         addButton.setForeground(Color.white);
-        addButton.setBounds(75, 10, 150, 40);
+        addButton.setBounds(160, 10, 150, 40);
         addButton.setFocusPainted(false);// ？    按钮字周围的小光圈
         menuJPanel.add(addButton);
 
@@ -141,7 +142,7 @@ public class SystemOrdinaryUsers extends JPanel {
         queryMyBookButton.setFont(new Font("微软雅黑", Font.BOLD, 15));
         queryMyBookButton.setBackground(new Color(0xFFFF4E4E, true));
         queryMyBookButton.setForeground(Color.white);
-        queryMyBookButton.setBounds(255, 10, 150, 40);
+        queryMyBookButton.setBounds(340, 10, 150, 40);
         queryMyBookButton.setFocusPainted(false);
         menuJPanel.add(queryMyBookButton);
 
@@ -163,7 +164,7 @@ public class SystemOrdinaryUsers extends JPanel {
         borrowBookButton.setFont(new Font("微软雅黑", Font.BOLD, 15));
         borrowBookButton.setBackground(new Color(0xFFFF4E4E, true));
         borrowBookButton.setForeground(Color.white);
-        borrowBookButton.setBounds(615, 10, 150, 40);
+        borrowBookButton.setBounds(520, 10, 150, 40);
         borrowBookButton.setFocusPainted(false);
         menuJPanel.add(borrowBookButton);
 
@@ -194,7 +195,7 @@ public class SystemOrdinaryUsers extends JPanel {
         returnBookButton.setFont(new Font("微软雅黑", Font.BOLD, 15));
         returnBookButton.setBackground(new Color(0xFFFF4E4E, true));
         returnBookButton.setForeground(Color.white);
-        returnBookButton.setBounds(795, 10, 150, 40);
+        returnBookButton.setBounds(700, 10, 150, 40);
         returnBookButton.setFocusPainted(false);
         menuJPanel.add(returnBookButton);
 
@@ -622,16 +623,18 @@ public class SystemOrdinaryUsers extends JPanel {
             setSize(800, 500);
             setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             setLocationRelativeTo(null);
+
             JLabel jlName = new JLabel("书籍名称:",JLabel.CENTER);
             jlName.setFont(new Font("微软黑体",Font.BOLD,20));
-            jlName.setBounds(50,10,200,80);
+            jlName.setBounds(150,10,200,80);
             JTextField jlNameContent = new JTextField();
-            jlNameContent.setBounds(260,10,400,80);
+            jlNameContent.setBounds(360,30,200,40);
             jlNameContent.setFont(new Font("微软黑体",Font.PLAIN,20));
             jlNameContent.setHorizontalAlignment(JTextField.CENTER);
+
             JLabel jlOwner = new JLabel("书籍拥有者:",JLabel.CENTER);
             jlOwner.setFont(new Font("微软黑体",Font.BOLD,20));
-            jlOwner.setBounds(50,100,200,80);
+            jlOwner.setBounds(150,100,200,80);
             JLabel jlOwnerConter = new JLabel(userVo.getName());
             jlOwnerConter.setBounds(260,100,400,80);
             jlOwnerConter.setFont(new Font("微软黑体",Font.PLAIN,20));
@@ -640,7 +643,7 @@ public class SystemOrdinaryUsers extends JPanel {
 
             JLabel jlOwnerStudnetId = new JLabel("拥有者学号:",JLabel.CENTER);
             jlOwnerStudnetId.setFont(new Font("微软黑体",Font.BOLD,20));
-            jlOwnerStudnetId.setBounds(50,190,200,80);
+            jlOwnerStudnetId.setBounds(150,190,200,80);
             JLabel jlOwnerStudentIdConter = new JLabel(userVo.getName());
             jlOwnerStudentIdConter.setBounds(260,190,400,80);
             jlOwnerStudentIdConter.setFont(new Font("微软黑体",Font.PLAIN,20));
@@ -648,9 +651,9 @@ public class SystemOrdinaryUsers extends JPanel {
 
             JLabel jlPrice = new JLabel("书籍价格:",JLabel.CENTER);
             jlPrice.setFont(new Font("微软黑体",Font.BOLD,20));
-            jlPrice.setBounds(50,280,200,80);
+            jlPrice.setBounds(150,280,200,80);
             JTextField jlPriceConter = new JTextField();
-            jlPriceConter.setBounds(260,280,400,80);
+            jlPriceConter.setBounds(360,300,200,40);
             jlPriceConter.setFont(new Font("微软黑体",Font.PLAIN,20));
             jlPriceConter.setHorizontalAlignment(JTextField.CENTER);
 
@@ -714,51 +717,72 @@ public class SystemOrdinaryUsers extends JPanel {
             setSize(800, 500);
             setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             setLocationRelativeTo(null);
-            JLabel jlName = new JLabel("书籍名称");
-            jlName.setFont(new Font("微软黑体",Font.BOLD,15));
-            jlName.setBounds(220,25,100,30);
-            JLabel jlNameContent = new JLabel((String) dataV.get(borrowSelectColmn).get(0));
-            jlNameContent.setFont(new Font("微软黑体",Font.PLAIN,15));
-            jlNameContent.setBounds(330,25,300,30);
 
-            JLabel jlBorrowName = new JLabel("书籍拥有者");
-            jlBorrowName.setFont(new Font("微软黑体",Font.BOLD,15));
-            jlBorrowName.setBounds(220,155,100,30);
-            JLabel jlBorrowConter = new JLabel((String) dataV.get(borrowSelectColmn).get(1));
-            jlBorrowConter.setFont(new Font("微软黑体",Font.PLAIN,15));
-            jlBorrowConter.setBounds(330,155,300,30);
+            JLabel jlName = new JLabel("书籍名称:",JLabel.CENTER);
+            jlName.setFont(new Font("微软黑体",Font.BOLD,20));
+            jlName.setBounds(150,30,200,40);
+            JLabel jlNameContent = new JLabel((String) dataV.get(borrowSelectColmn).get(0),JLabel.CENTER);
+            jlNameContent.setFont(new Font("微软黑体",Font.PLAIN,20));
+            jlNameContent.setBounds(260,30,400,40);
 
-            JLabel jlStudentId = new JLabel("拥有者学号");
-            jlStudentId.setFont(new Font("微软黑体",Font.BOLD,15));
-            jlStudentId.setBounds(220,155,100,30);
-            JLabel jlStudentIdConter = new JLabel(dataV.get(borrowSelectColmn).get(2).toString());
-            jlStudentIdConter.setFont(new Font("微软黑体",Font.PLAIN,15));
-            jlStudentIdConter.setBounds(330,155,300,30);
+            JLabel jlBorrowName = new JLabel("书籍拥有者:",JLabel.CENTER);
+            jlBorrowName.setFont(new Font("微软黑体",Font.BOLD,20));
+            jlBorrowName.setBounds(150,85,200,40);
+            JLabel jlBorrowConter = new JLabel((String) dataV.get(borrowSelectColmn).get(1),JLabel.CENTER);
+            jlBorrowConter.setFont(new Font("微软黑体",Font.PLAIN,20));
+            jlBorrowConter.setBounds(260,85,400,40);
 
-            JLabel jlPrice = new JLabel("书籍价格");
-            jlPrice.setFont(new Font("微软黑体",Font.BOLD,15));
-            jlPrice.setBounds(220,155,100,30);
-            JLabel jlPriceConter = new JLabel(dataV.get(borrowSelectColmn).get(3).toString());
-            jlPriceConter.setFont(new Font("微软黑体",Font.PLAIN,15));
-            jlPriceConter.setBounds(330,155,300,30);
+            JLabel jlStudentId = new JLabel("拥有者学号:",JLabel.CENTER);
+            jlStudentId.setFont(new Font("微软黑体",Font.BOLD,20));
+            jlStudentId.setBounds(150,140,200,40);
+            JLabel jlStudentIdConter = new JLabel(dataV.get(borrowSelectColmn).get(2).toString(),JLabel.CENTER);
+            jlStudentIdConter.setFont(new Font("微软黑体",Font.PLAIN,20));
+            jlStudentIdConter.setBounds(260,140,400,40);
 
-            JLabel jlReturnTime = new JLabel("书籍归还时间");
-            jlReturnTime.setFont(new Font("微软黑体",Font.BOLD,15));
-            jlReturnTime.setBounds(220,155,100,30);
-            JLabel jlReturnTimeConter = new JLabel(dataV.get(borrowSelectColmn).get(3).toString());
-            jlReturnTimeConter.setFont(new Font("微软黑体",Font.PLAIN,15));
-            jlReturnTimeConter.setBounds(330,155,300,30);
+            JLabel jlPrice = new JLabel("书籍价格:",JLabel.CENTER);
+            jlPrice.setFont(new Font("微软黑体",Font.BOLD,20));
+            jlPrice.setBounds(150,195,200,40);
+            JLabel jlPriceConter = new JLabel(dataV.get(borrowSelectColmn).get(3).toString(),JLabel.CENTER);
+            jlPriceConter.setFont(new Font("微软黑体",Font.PLAIN,20));
+            jlPriceConter.setBounds(260,195,400,40);
+
+            JLabel jlReturnTime = new JLabel("借阅时间",JLabel.CENTER);
+            jlReturnTime.setFont(new Font("微软黑体",Font.BOLD,20));
+            jlReturnTime.setBounds(150,250,200,40);
+
+            JRadioButton rb1 = new JRadioButton("3天", true);
+            // 创建单选按钮，并且默认已选中
+            JRadioButton rb2 = new JRadioButton("5天", false);
+            // 创建单选按钮，并且默认未选中
+            JRadioButton rb3 = new JRadioButton("7天", false);
+            rb1.setBounds(360,250,60,40);
+            rb2.setBounds(430 ,250,60,40);
+            rb3.setBounds(500,250,60,40);
+            rb1.setBackground(Color.white);
+            rb2.setBackground(Color.white);
+            rb3.setBackground(Color.white);
+            rb1.setFont(new Font("微软黑体",Font.BOLD,20));
+            rb2.setFont(new Font("微软黑体",Font.BOLD,20));
+            rb3.setFont(new Font("微软黑体",Font.BOLD,20));
+
+            ButtonGroup group = new ButtonGroup(); // 创建一个按钮小组
+            group.add(rb1); // 把单选按钮1加入到按钮小组
+            group.add(rb2); // 把单选按钮2加入到按钮小组
+            group.add(rb3); // 把单选按钮3加入到按钮小组
 
             JPanel jp = new JPanel();
             jp.setSize(800,500);
             jp.setBackground(Color.WHITE);
             jp.setLayout(null);
+            add(jp);
+
             JButton jb = new JButton("确认借阅");
             jb.setFont(new Font("微软黑体",Font.BOLD,15));
-            jb.setBounds(250,380,300,40);
+            jb.setBounds(150,350,500,60);
             jb.setBackground(Color.PINK);
             jb.setForeground(Color.WHITE);
             jb.setFocusPainted(false);
+
             jp.add(jlName);
             jp.add(jlNameContent);
             jp.add(jlBorrowName);
@@ -767,6 +791,11 @@ public class SystemOrdinaryUsers extends JPanel {
             jp.add(jlStudentIdConter);
             jp.add(jlPrice);
             jp.add(jlPriceConter);
+            jp.add(jlReturnTime);
+            jp.add(rb1);
+            jp.add(rb2);
+            jp.add(rb3);
+            jp.add(jb);
             jb.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -811,8 +840,6 @@ public class SystemOrdinaryUsers extends JPanel {
                     setVisible(false);
                   }
             });
-            jp.add(jb);
-            add(jp);
         }
     }
 

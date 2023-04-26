@@ -16,8 +16,8 @@ public class index {
         int height = 800;
         jFrame.setBounds((sw - width) / 2, (sh - height) / 2, width, height);
         jFrame.setTitle("主界面");
-       SystemOrdinaryUsers systemAdministration = new SystemOrdinaryUsers();
-//        SystemAdministration systemAdministration = new SystemAdministration();
+//       SystemOrdinaryUsers systemAdministration = new SystemOrdinaryUsers();
+        SystemAdministration systemAdministration = new SystemAdministration();
         jFrame.add(systemAdministration);
         jFrame.setVisible(true);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
